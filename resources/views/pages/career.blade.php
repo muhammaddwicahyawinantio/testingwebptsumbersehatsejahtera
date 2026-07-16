@@ -91,57 +91,6 @@
                     </a>
                 </div>
             </div>
-
-            {{-- Card: Program PKPA --}}
-            <div class="bg-white rounded-xl shadow-sm hover:shadow-2xl transition-shadow duration-300 border border-gray-100 flex flex-col overflow-hidden"
-                 data-aos="fade-up" data-aos-delay="100">
-                <div class="w-full">
-                    <img src="{{ $pkpa && $pkpa->image ? asset('storage/' . $pkpa->image) : 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=1000' }}"
-                         alt="Program PKPA"
-                         class="w-full h-auto"
-                         loading="lazy">
-                </div>
-                <div class="p-8 flex-1 flex flex-col">
-                    <span class="text-xs font-extrabold text-light-blue uppercase tracking-widest mb-2">
-                        {{ $pkpa->badge_text ?? 'Internship' }}
-                    </span>
-                    <h3 class="text-2xl font-black text-deep-blue mb-3">Program PKPA</h3>
-                    <p class="text-deep-blue/60 text-sm leading-relaxed mb-6">
-                        {{ $pkpa->description_id ?? 'Praktek Kerja Profesi Apoteker dengan standar CDOB.' }}
-                    </p>
-                    <a href="{{ $pkpa->apply_url ?? '#' }}"
-                       target="_blank" rel="noopener noreferrer"
-                       class="w-full py-3 border-2 border-light-blue text-light-blue font-bold text-sm rounded-lg text-center hover:bg-light-blue hover:text-white transition-all duration-200 mt-auto">
-                        Daftar PKPA
-                    </a>
-                </div>
-            </div>
-
-            {{-- Card: Magang Kemnaker --}}
-            <div class="bg-white rounded-xl shadow-sm hover:shadow-2xl transition-shadow duration-300 border border-gray-100 flex flex-col overflow-hidden"
-                 data-aos="fade-up" data-aos-delay="200">
-                <div class="w-full">
-                    <img src="{{ $kemenhub && $kemenhub->image ? asset('storage/' . $kemenhub->image) : 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1000' }}"
-                         alt="Magang Kemnaker"
-                         class="w-full h-auto"
-                         loading="lazy">
-                </div>
-                <div class="p-8 flex-1 flex flex-col">
-                    <span class="text-xs font-extrabold text-deep-blue/50 uppercase tracking-widest mb-2">
-                        {{ $kemenhub->badge_text ?? 'Kemenhub' }}
-                    </span>
-                    <h3 class="text-2xl font-black text-deep-blue mb-3">Magang Kemnaker</h3>
-                    <p class="text-deep-blue/60 text-sm leading-relaxed mb-6">
-                        {{ $kemenhub->description_id ?? 'Program Magang khusus Taruna/i Kementerian Perhubungan.' }}
-                    </p>
-                    <a href="{{ $kemenhub->apply_url ?? '#' }}"
-                       target="_blank" rel="noopener noreferrer"
-                       class="w-full py-3 border-2 border-deep-blue/30 text-deep-blue/60 font-bold text-sm rounded-lg text-center hover:bg-deep-blue hover:text-white hover:border-deep-blue transition-all duration-200 mt-auto">
-                        Form Taruna
-                    </a>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
