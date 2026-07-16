@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Filament\Resources\ContactMessages\ContactMessageResource;
 use App\Models\ContactMessage;
-use App\Models\User; // Import Model User
+use App\Models\User;
+use Closure;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
-use Filament\Notifications\Notification; // Import Notifikasi Filament
-use Filament\Actions\Action; // ✅ Action Filament v5
-use Illuminate\Support\Facades\Http; // ✅ Tambahan untuk request ke Google API
-use Closure; // ✅ Tambahan untuk custom rule validasi
+use Illuminate\Support\Facades\Http;
 
 class ContactController extends Controller
 {
@@ -21,15 +23,22 @@ class ContactController extends Controller
             'phone'   => 'nullable|string|max:20',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
-            // ✅ Tambahan validasi reCAPTCHA
             'g-recaptcha-response' => [
                 'required',
                 function (string $attribute, mixed $value, Closure $fail) use ($request) {
-                    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                        'secret'   => config('services.recaptcha.secret_key'),
-                        'response' => $value,
-                        'remoteip' => $request->ip()
-                    ]);
+                    try {
+                        $response = Http::asForm()
+                            ->timeout(10)
+                            ->post('https://www.google.com/recaptcha/api/siteverify', [
+                                'secret'   => config('services.recaptcha.secret_key'),
+                                'response' => $value,
+                                'remoteip' => $request->ip(),
+                            ]);
+                    } catch (ConnectionException) {
+                        $fail('Verifikasi reCAPTCHA tidak dapat dihubungi. Silakan coba lagi.');
+
+                        return;
+                    }
 
                     if (! $response->json('success')) {
                         $fail('Verifikasi reCAPTCHA gagal. Pastikan Anda mencentang kotak "I\'m not a robot".');
@@ -37,20 +46,16 @@ class ContactController extends Controller
                 },
             ],
         ], [
-            // ✅ Pesan error kustom jika reCAPTCHA tidak dicentang
             'g-recaptcha-response.required' => 'Silakan centang kotak "I\'m not a robot" terlebih dahulu.',
         ]);
 
-        // ✅ Hapus 'g-recaptcha-response' dari array $validated agar tidak error saat create ke database
+        // g-recaptcha-response bukan kolom database, jangan ikut disimpan
         unset($validated['g-recaptcha-response']);
 
-        // 2. Simpan ke database
         $pesan = ContactMessage::create($validated);
 
-        // 3. KIRIM NOTIFIKASI KE ADMIN FILAMENT (Bagian Baru)
-        $recipients = User::all();
-
-        foreach ($recipients as $recipient) {
+        // Kirim notifikasi database ke semua admin Filament
+        foreach (User::all() as $recipient) {
             Notification::make()
                 ->title('Pesan Baru: ' . $validated['subject'])
                 ->body('Dari: ' . $validated['name'] . ' (' . $validated['email'] . ')')
@@ -58,14 +63,13 @@ class ContactController extends Controller
                 ->actions([
                     Action::make('Lihat')
                         ->button()
-                        ->url(\App\Filament\Resources\ContactMessages\ContactMessageResource::getUrl('view', [
+                        ->url(ContactMessageResource::getUrl('view', [
                             'record' => $pesan->getKey(),
                         ])),
                 ])
                 ->sendToDatabase($recipient);
         }
 
-        // 4. Kembali ke halaman sebelumnya
         return back()->with('success', 'Pesan Anda telah berhasil dikirim!');
     }
 }

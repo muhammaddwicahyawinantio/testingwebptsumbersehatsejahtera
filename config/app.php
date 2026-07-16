@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Admin Emails
+    |--------------------------------------------------------------------------
+    |
+    | Daftar email (dipisah koma) yang boleh mengakses panel admin Filament.
+    | Dibaca lewat config() agar tetap berfungsi saat config di-cache
+    | (php artisan config:cache) di production.
+    |
+    */
+
+    'admin_emails' => env('ADMIN_EMAILS', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

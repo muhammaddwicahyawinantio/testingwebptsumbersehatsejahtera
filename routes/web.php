@@ -15,4 +15,6 @@ Route::get('/career', [CareerController::class, 'index'])->name('career');
 Route::get('/contact', [SalesController::class, 'index'])->name('contact');
 Route::get('/partners', [PartnersController::class, 'index'])->name('partners');
 
-Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
+Route::post('/contact-submit', [ContactController::class, 'store'])
+    ->middleware('throttle:10,1') // maksimal 10 kiriman per menit per IP (anti-spam)
+    ->name('contact.submit');
