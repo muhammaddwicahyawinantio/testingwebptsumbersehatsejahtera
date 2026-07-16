@@ -55,7 +55,7 @@ RUN npm run build
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# 11. CMD: clear cache, migrate, lalu jalankan Apache
+# 11. CMD: migrate dulu, baru clear/cache, baru jalankan Apache
 CMD ["sh", "-c", "\
     rm -f /etc/apache2/mods-enabled/mpm_event.conf \
     /etc/apache2/mods-enabled/mpm_event.load \
@@ -63,11 +63,11 @@ CMD ["sh", "-c", "\
     /etc/apache2/mods-enabled/mpm_worker.load && \
     ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf && \
     ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load && \
+    php artisan migrate --force && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan config:cache && \
     php artisan route:cache && \
     php artisan view:cache && \
-    php artisan migrate --force && \
     php artisan storage:link --force && \
     apache2-foreground"]
