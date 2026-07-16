@@ -15,7 +15,7 @@
                 {{-- Slide 1: Kantor Pusat --}}
                 <div class="swiper-slide relative">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] ease-out group-hover:scale-110"
-                         style="background-image: url('{{ Vite::asset('public/images/gambarkantor.png') }}');"
+                         style="background-image: url('{{ asset('public/images/gambarkantor.png') }}');"
                          role="img" aria-label="Kantor Pusat PT Sumber Sehat Sejahtera">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-r from-deep-blue/90 via-deep-blue/60 to-deep-blue/30 pointer-events-none"></div>
