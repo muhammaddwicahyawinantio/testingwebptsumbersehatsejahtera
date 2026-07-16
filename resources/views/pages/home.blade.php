@@ -15,7 +15,7 @@
                 {{-- Slide 1: Kantor Pusat --}}
                 <div class="swiper-slide relative">
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] ease-out group-hover:scale-110"
-                         style="background-image: url('{{ Vite::asset('public/images/gambarkantor.png') }}');"
+                         s
                          role="img" aria-label="Kantor Pusat PT Sumber Sehat Sejahtera">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-r from-deep-blue/90 via-deep-blue/60 to-deep-blue/30 pointer-events-none"></div>
@@ -152,26 +152,24 @@
     {{-- ═══════════════════════════════════════════════
          SECTION 3: YEL-YEL CORPORATE
     ═══════════════════════════════════════════════ --}}
-    <section id="yel-yel-section" class="relative w-full h-[30vh] min-h-[250px] bg-white flex items-center justify-center overflow-hidden">
+<section id="yel-yel-section" class="relative w-full min-h-[60dvh] md:min-h-[50vh] bg-white flex items-center justify-center overflow-hidden">
         <div class="relative z-10 w-full max-w-6xl px-4 text-center pointer-events-none">
 
             {{-- Phase 1: Intro --}}
             <div id="net-intro" class="absolute inset-0 flex items-center justify-center transition-all duration-700 opacity-0 scale-150">
-                <h2 class="text-4xl md:text-5xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-light-blue to-magenta-accent tracking-tight">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-light-blue to-magenta-accent tracking-tight">
                     SPECIAL PEOPLE
                 </h2>
             </div>
 
             {{-- Phase 2: Slogan --}}
-            <div id="net-slogan" class="relative z-10 flex flex-row items-center justify-center gap-4 md:gap-12 h-full opacity-0 translate-y-8 transition-all duration-700">
-                <span id="n-word-1" class="text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Bersama</span>
-                <span id="n-word-2" class="text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Berkarya</span>
-                <span id="n-word-3" class="text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Bermakna</span>
+            <div id="net-slogan" class="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 h-full opacity-0 translate-y-8 transition-all duration-700">
+                <span id="n-word-1" class="text-3xl sm:text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Bersama</span>
+                <span id="n-word-2" class="text-3xl sm:text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Berkarya</span>
+                <span id="n-word-3" class="text-3xl sm:text-4xl md:text-6xl font-black text-deep-blue uppercase tracking-widest opacity-50 scale-90 transition-all duration-500">Bermakna</span>
             </div>
         </div>
     </section>
-
-
     {{-- ═══════════════════════════════════════════════
          SECTION 4: CORE EXPERTISE
     ═══════════════════════════════════════════════ --}}
