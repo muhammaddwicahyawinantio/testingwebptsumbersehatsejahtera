@@ -1,4 +1,16 @@
 .git
+.github
+.claude
 node_modules
 vendor
 .env
+.env.backup
+.env.production
+public/build
+public/hot
+public/storage
+storage/debugbar
+storage/logs/*.log
+tests
+.editorconfig
+README.md
