@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->favicon(asset('images/3s.png'))
         ->colors([
             'primary' => Color::Blue,  // Menggunakan preset warna Filament
             'danger' => Color::Rose,

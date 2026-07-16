@@ -39,9 +39,9 @@
     <meta name="twitter:description" content="{{ $description }}">
     <meta name="twitter:image"       content="{{ $ogImage }}">
 
-    {{-- Favicons --}}
-    <link rel="icon"             href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/3s.png') }}">
+    {{-- Favicons (favicon.ico bawaan Laravel kosong 0 byte, pakai logo PNG) --}}
+    <link rel="icon" type="image/png" href="{{ asset('images/3s.png') }}">
+    <link rel="apple-touch-icon"      href="{{ asset('images/3s.png') }}">
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
